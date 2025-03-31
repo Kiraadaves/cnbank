@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -21,7 +21,14 @@ type Transaction = {
   icon: JSX.Element;
 };
 
-export function RecentTransactions() {
+interface Todo {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+const RecentTransactions = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +37,6 @@ export function RecentTransactions() {
     const fetchTransactions = async () => {
       setLoading(true);
       try {
-        // JSONPlaceholder API - Free mock API
         const response = await fetch(
           "https://jsonplaceholder.typicode.com/users/1/todos"
         );
@@ -39,17 +45,15 @@ export function RecentTransactions() {
           throw new Error("Failed to fetch data");
         }
 
-        const result = await response.json();
+        const result: Todo[] = await response.json();
 
-        // Transform the data for our transactions
-        if (result && result.length > 0) {
-          // We'll use the todos as inspiration for transactions
+        if (result?.length) {
           const icons = [
-            <ArrowDownRight key="1" className="h-4 w-4 text-green-500" />,
-            <Coffee key="2" className="h-4 w-4 text-amber-500" />,
-            <ShoppingBag key="3" className="h-4 w-4 text-blue-500" />,
-            <ArrowUpRight key="4" className="h-4 w-4 text-red-500" />,
-            <CreditCard key="5" className="h-4 w-4 text-purple-500" />,
+            <ArrowDownRight key="1" className="h-6 w-6 text-green-500" />,
+            <Coffee key="2" className="h-6 w-6 text-amber-500" />,
+            <ShoppingBag key="3" className="h-6 w-6 text-blue-500" />,
+            <ArrowUpRight key="4" className="h-6 w-6 text-red-500" />,
+            <CreditCard key="5" className="h-6 w-6 text-purple-500" />,
           ];
 
           const types = [
@@ -63,7 +67,7 @@ export function RecentTransactions() {
 
           const formattedData = result
             .slice(0, 5)
-            .map((todo: any, index: number) => {
+            .map((todo: Todo, index: number) => {
               const date = new Date();
               date.setDate(date.getDate() - index);
 
@@ -88,14 +92,12 @@ export function RecentTransactions() {
 
           setTransactions(formattedData);
         } else {
-          // Fall back to mock data
           console.log("Unexpected response format, using mock data");
           generateMockData();
         }
       } catch (error) {
         console.error("Failed to fetch transactions:", error);
         setError("Failed to load data. Using sample data instead.");
-        // Fall back to mock data
         generateMockData();
       } finally {
         setLoading(false);
@@ -103,7 +105,6 @@ export function RecentTransactions() {
     };
 
     const generateMockData = () => {
-      // Mock data for demonstration
       const mockTransactions = [
         {
           id: "t1",
@@ -111,7 +112,7 @@ export function RecentTransactions() {
           amount: 2500,
           date: "Mar 21, 2025",
           description: "Salary Deposit",
-          icon: <ArrowDownRight className="h-4 w-4 text-green-500" />,
+          icon: <ArrowDownRight className="h-6 w-6 text-green-500" />,
         },
         {
           id: "t2",
@@ -119,7 +120,7 @@ export function RecentTransactions() {
           amount: -42.5,
           date: "Mar 20, 2025",
           description: "Coffee Shop",
-          icon: <Coffee className="h-4 w-4 text-amber-500" />,
+          icon: <Coffee className="h-6 w-6 text-amber-500" />,
         },
         {
           id: "t3",
@@ -127,7 +128,7 @@ export function RecentTransactions() {
           amount: -156.24,
           date: "Mar 18, 2025",
           description: "Grocery Store",
-          icon: <ShoppingBag className="h-4 w-4 text-blue-500" />,
+          icon: <ShoppingBag className="h-6 w-6 text-blue-500" />,
         },
         {
           id: "t4",
@@ -135,7 +136,7 @@ export function RecentTransactions() {
           amount: -500,
           date: "Mar 15, 2025",
           description: "ATM Withdrawal",
-          icon: <ArrowUpRight className="h-4 w-4 text-red-500" />,
+          icon: <ArrowUpRight className="h-6 w-6 text-red-500" />,
         },
         {
           id: "t5",
@@ -143,7 +144,7 @@ export function RecentTransactions() {
           amount: -89.99,
           date: "Mar 12, 2025",
           description: "Monthly Subscription",
-          icon: <CreditCard className="h-4 w-4 text-purple-500" />,
+          icon: <CreditCard className="h-6 w-6 text-purple-500" />,
         },
       ] as Transaction[];
 
@@ -195,11 +196,13 @@ export function RecentTransactions() {
               transaction.amount > 0 ? "text-green-500" : ""
             }`}
           >
-            {transaction.amount > 0 ? "+" : ""}$
+            {transaction.amount > 0 ? "+" : ""}₦
             {Math.abs(transaction.amount).toFixed(2)}
           </div>
         </div>
       ))}
     </div>
   );
-}
+};
+
+export default RecentTransactions;

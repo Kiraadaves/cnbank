@@ -15,7 +15,7 @@ type Investment = {
   color: string;
 };
 
-export function InvestmentPortfolio() {
+const InvestmentPortfolio = () => {
   const [investments, setInvestments] = useState<Investment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +24,6 @@ export function InvestmentPortfolio() {
     const fetchCryptoData = async () => {
       setLoading(true);
       try {
-        // CoinGecko API - Free tier with no API key required
         const response = await fetch(
           "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=5&page=1"
         );
@@ -40,9 +39,9 @@ export function InvestmentPortfolio() {
           const colors = [
             "hsl(210, 100%, 50%)", // Primary blue
             "hsl(220, 85%, 65%)", // Lighter blue
-            "hsl(200, 75%, 55%)", // Teal-blue
-            "hsl(230, 80%, 60%)", // Purple-blue
-            "hsl(190, 70%, 70%)", // Light cyan-blue
+            "hsl(106 100% 32%)", // Teal-blue
+            "hsl(45 100% 60%)", // Purple-blue
+            "hsl(0 100% 50%)", // Light cyan-blue
           ];
 
           const formattedData = result.map((coin, index: number) => ({
@@ -72,9 +71,9 @@ export function InvestmentPortfolio() {
       const mockInvestments = [
         { name: "Stocks", value: 18500, color: "hsl(210, 100%, 50%)" }, // Primary blue
         { name: "Bonds", value: 6200, color: "hsl(220, 85%, 65%)" }, // Lighter blue
-        { name: "Real Estate", value: 4800, color: "hsl(200, 75%, 55%)" }, // Teal-blue
-        { name: "Crypto", value: 1950, color: "hsl(230, 80%, 60%)" }, // Purple-blue
-        { name: "Cash", value: 1000, color: "hsl(190, 70%, 70%)" }, // Light cyan-blue
+        { name: "Real Estate", value: 4800, color: "hsl(106 100% 32%)" }, // Teal-blue
+        { name: "Crypto", value: 1950, color: "hsl(45 100% 60%)" }, // Purple-blue
+        { name: "Cash", value: 1000, color: "hsl(0 100% 50%)" }, // Light cyan-blue
       ] as Investment[];
 
       setInvestments(mockInvestments);
@@ -120,7 +119,7 @@ export function InvestmentPortfolio() {
           </Pie>
           <Tooltip
             formatter={(value) => [
-              `$${Number(value).toLocaleString()}`,
+              `₦${Number(value).toLocaleString()}`,
               "Amount",
             ]}
             itemStyle={{ color: "var(--foreground)" }}
@@ -128,8 +127,10 @@ export function InvestmentPortfolio() {
         </PieChart>
       </ResponsiveContainer>
       <div className="mt-2 text-center text-sm text-muted-foreground">
-        Total Portfolio: ${total.toLocaleString()}
+        Total Portfolio: ₦{total.toLocaleString()}
       </div>
     </div>
   );
-}
+};
+
+export default InvestmentPortfolio;

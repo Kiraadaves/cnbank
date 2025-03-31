@@ -1,13 +1,5 @@
 import Link from "next/link";
-import {
-  ArrowLeft,
-  TrendingUp,
-  User,
-  Bell,
-  Shield,
-  CreditCard,
-  Plus,
-} from "lucide-react";
+import { ArrowLeft, User, Bell, Shield, CreditCard, Plus } from "lucide-react";
 
 import {
   Card,
@@ -21,52 +13,20 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { MobileNav } from "@/components/mobile-nav";
-import { UserProfile } from "@/components/user-profile";
+import UserProfile from "@/components/user-profile";
+import Navbar from "@/components/mobile-nav";
 
-export const ProfilePage = () => {
+const ProfilePage = () => {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 flex h-16 items-center gap-4 border-b bg-gradient-to-r from-[#0078ff] to-[#00a3ff] text-white px-4 md:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-semibold text-white"
-        >
-          <TrendingUp className="h-6 w-6 text-white" />
-          <span>WealthWise</span>
-        </Link>
-        <nav className="ml-auto hidden items-center gap-4 md:flex">
-          <Link
-            href="/"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="/investments"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Investments
-          </Link>
-          <Link
-            href="/savings"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Savings
-          </Link>
-          <Link href="/profile" className="text-sm font-medium text-white">
-            Profile
-          </Link>
-        </nav>
-        <MobileNav />
-      </header>
+      <Navbar />
       <main className="flex-1 space-y-4 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white">
         <div className="flex items-center">
           <Link
             href="/"
-            className="mr-2 inline-flex items-center justify-center rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+            className="mr-2 inline-flex items-center justify-center rounded-full p-1 bg-[#00a3ff]"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-6 w-6 text-[#ffffff]" />
             <span className="sr-only">Back to Dashboard</span>
           </Link>
           <h1 className="text-2xl font-bold tracking-tight">
@@ -160,11 +120,11 @@ export const ProfilePage = () => {
                   </div>
                   <div className="w-[180px]">
                     <select className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                      <option>USD ($)</option>
+                      <option>USD (₦)</option>
                       <option>EUR (€)</option>
                       <option>GBP (£)</option>
                       <option>JPY (¥)</option>
-                      <option>CAD ($)</option>
+                      <option>CAD (₦)</option>
                     </select>
                   </div>
                 </div>
@@ -466,3 +426,5 @@ export const ProfilePage = () => {
     </div>
   );
 };
+
+export default ProfilePage;

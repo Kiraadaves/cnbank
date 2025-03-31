@@ -22,7 +22,7 @@ type UserData = {
   };
 };
 
-export function UserProfile() {
+const UserProfile = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -126,4 +126,6 @@ export function UserProfile() {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default UserProfile;

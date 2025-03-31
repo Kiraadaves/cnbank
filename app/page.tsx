@@ -1,12 +1,5 @@
 import Link from "next/link";
-import {
-  DollarSign,
-  TrendingUp,
-  PiggyBank,
-  User,
-  BarChart3,
-} from "lucide-react";
-
+import { DollarSign, PiggyBank, User, BarChart3 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -15,185 +8,211 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Overview } from "@/components/overview";
-import { SavingsGoals } from "@/components/savings-goals";
-import { InvestmentPortfolio } from "@/components/investment-portfolio";
-import { MobileNav } from "@/components/mobile-nav";
-import { RecentTransactions } from "@/components/recent-transactions";
+import Overview from "@/components/overview";
+import RecentTransactions from "@/components/recent-transactions";
+import SavingsGoals from "@/components/savings-goals";
+import InvestmentPortfolio from "@/components/investment-portfolio";
+import Ball from "@/components/ball";
+import Navbar from "@/components/mobile-nav";
 
-export const Dashboard = () => {
-  return (
-    <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 flex h-16 items-center gap-4 border-b bg-gradient-to-r from-[#0078ff] to-[#00a3ff] text-white px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-2 font-semibold">
-          <TrendingUp className="h-6 w-6 text-white" />
-          <span>WealthWise</span>
+const Home = () => {
+  // Stats cards data
+  const statCards = [
+    {
+      title: "Total Balance",
+      icon: <DollarSign className="h-7 w-7 text-[#0078ff]" />,
+      value: "₦45,231.89",
+      description: "+20.1% from last month",
+      class: "text-black",
+    },
+    {
+      title: "Investments",
+      icon: <BarChart3 className="h-7 w-7 text-[#0078ff]" />,
+      value: "₦32,450.00",
+      description: "+4.3% overall return",
+      class: "text-yellow-500",
+    },
+    {
+      title: "Savings",
+      icon: <PiggyBank className="h-7 w-7 text-[#0078ff]" />,
+      value: "₦12,781.89",
+      description: "+₦1,200.00 this month",
+      class: "text-green-500",
+    },
+    {
+      title: "Monthly Spending",
+      icon: <DollarSign className="h-7 w-7 text-[#0078ff]" />,
+      value: "₦3,352.40",
+      description: "-12.5% from last month",
+      class: "text-red-500",
+    },
+  ];
+
+  // Main content cards data
+  const contentCards = [
+    {
+      cols: "lg:col-span-4",
+      title: "Portfolio Overview",
+      description: "Your investment performance for the past 30 days",
+      content: <Overview />,
+      footer: null,
+    },
+    {
+      cols: "lg:col-span-3",
+      title: "Recent Transactions",
+      description: "Your latest financial activities",
+      content: <RecentTransactions />,
+      footer: (
+        <Link
+          href="#"
+          className="text-sm bg-[#0078ff] text-white rounded-[6px] py-3 px-4 "
+        >
+          View all transactions
         </Link>
-        <nav className="ml-auto hidden items-center gap-4 md:flex">
-          <Link href="/" className="text-sm font-medium text-white">
+      ),
+    },
+    {
+      cols: "lg:col-span-3",
+      title: "Savings Goals",
+      description: "Track your progress towards financial goals",
+      content: <SavingsGoals />,
+      footer: (
+        <Link
+          href="/savings"
+          className="text-sm bg-[#0078ff] text-white rounded-[6px] py-3 px-4"
+        >
+          Manage savings goals
+        </Link>
+      ),
+    },
+    {
+      cols: "lg:col-span-4",
+      title: "Investment Portfolio",
+      description: "Your current investment allocation",
+      content: <InvestmentPortfolio />,
+      footer: (
+        <Link
+          href="/investments"
+          className="text-sm bg-[#0078ff] text-white rounded-[6px] py-3 px-4"
+        >
+          View portfolio details
+        </Link>
+      ),
+    },
+  ];
+
+  const balls = [
+    { size: "w-[10px] h-[10px]", color: "bg-blue-300" },
+    { size: "w-8 h-8", color: "bg-[#00a3ff]" },
+    { size: "w-[56px] h-[56px]", color: "bg-[#0078ff]" },
+    { size: "w-[56px] h-[56px]", color: "bg-blue-300" },
+    { size: "w-8 h-8", color: "bg-[#00a3ff]" },
+    { size: "w-[56px] h-[56px]", color: "bg-[#0078ff]" },
+    { size: "w-[10px] h-[10px]", color: "bg-blue-300" },
+    { size: "w-8 h-8", color: "bg-blue-300" },
+    { size: "w-[56px] h-[56px]", color: "bg-[#00a3ff]" },
+    { size: "w-[56px] h-[56px]", color: "bg-blue-300" },
+    { size: "w-8 h-8", color: "bg-blue-300" },
+    { size: "w-[56px] h-[56px]", color: "bg-[#0078ff]" },
+    { size: "w-[56px] h-[56px]", color: "bg-blue-300" },
+    { size: "w-[56px] h-[56px]", color: "bg-blue-300" },
+  ];
+
+  return (
+    <div className="flex min-h-screen flex-col w-full">
+      <Navbar />
+      <main className="relative flex-1 space-y-8  md:pt-12 pt-8 px-4 md:px-16 bg-gradient-to-b from-blue-50 to-white">
+        {balls.map((ball, index) => (
+          <Ball
+            key={index}
+            className={`z-30 ${ball.size} ${ball.color} rounded-full opacity-30 md:opacity-100`}
+          />
+        ))}
+
+        <div className="flex items-center justify-between z-40">
+          <h1 className="md:text-3xl text-2xl font-bold tracking-tight">
             Dashboard
-          </Link>
-          <Link
-            href="/investments"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Investments
-          </Link>
-          <Link
-            href="/savings"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Savings
-          </Link>
-          <Link
-            href="/profile"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Profile
-          </Link>
-        </nav>
-        <MobileNav />
-      </header>
-      <main className="flex-1 space-y-4 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
-          <div className="flex items-center gap-2">
+          </h1>
+          <div className="flex items-center gap-2 z-40">
             <Link
               href="/profile"
               className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
-              <User className="h-4 w-4" />
-              <span className="hidden md:inline">John Doe</span>
+              <User className="h-6 w-6" />
+              <span className="hidden md:inline text-xl">Chinwe Nwankwo</span>
             </Link>
           </div>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Total Balance
-              </CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">$45,231.89</div>
-              <p className="text-xs text-muted-foreground">
-                +20.1% from last month
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Investments</CardTitle>
-              <BarChart3 className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">$32,450.00</div>
-              <p className="text-xs text-muted-foreground">
-                +4.3% overall return
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Savings</CardTitle>
-              <PiggyBank className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">$12,781.89</div>
-              <p className="text-xs text-muted-foreground">
-                +$1,200.00 this month
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Monthly Spending
-              </CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">$3,352.40</div>
-              <p className="text-xs text-muted-foreground">
-                -12.5% from last month
-              </p>
-            </CardContent>
-          </Card>
+
+        {/* Stats cards */}
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 z-40">
+          {statCards.map((card, index) => (
+            <Card key={index} className="z-40">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-lg text-[#0078ff] font-medium">
+                  {card.title}
+                </CardTitle>
+                {card.icon}
+              </CardHeader>
+              <CardContent>
+                <p className={`${card.class} text-2xl font-bold`}>
+                  {card.value}
+                </p>
+                <p className="text-sm mt-2 text-gray-800">{card.description}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
+
+        {/* Main content cards */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-          <Card className="lg:col-span-4">
-            <CardHeader>
-              <CardTitle>Portfolio Overview</CardTitle>
-              <CardDescription>
-                Your investment performance for the past 30 days
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Overview />
-            </CardContent>
-          </Card>
-          <Card className="lg:col-span-3">
-            <CardHeader>
-              <CardTitle>Recent Transactions</CardTitle>
-              <CardDescription>
-                Your latest financial activities
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <RecentTransactions />
-            </CardContent>
-            <CardFooter>
-              <Link
-                href="/transactions"
-                className="text-sm text-primary hover:underline"
-              >
-                View all transactions
-              </Link>
-            </CardFooter>
-          </Card>
+          {contentCards.slice(0, 2).map((card, index) => (
+            <Card key={index} className={`${card.cols} z-40`}>
+              <CardHeader>
+                <CardTitle className="text-[#0078ff] text-lg">
+                  {card.title}
+                </CardTitle>
+                <CardDescription className="text-base">
+                  {card.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>{card.content}</CardContent>
+              {card.footer && (
+                <CardFooter className="flex justify-center">
+                  {card.footer}
+                </CardFooter>
+              )}
+            </Card>
+          ))}
         </div>
+
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-          <Card className="lg:col-span-3">
-            <CardHeader>
-              <CardTitle>Savings Goals</CardTitle>
-              <CardDescription>
-                Track your progress towards financial goals
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <SavingsGoals />
-            </CardContent>
-            <CardFooter>
-              <Link
-                href="/savings"
-                className="text-sm text-primary hover:underline"
-              >
-                Manage savings goals
-              </Link>
-            </CardFooter>
-          </Card>
-          <Card className="lg:col-span-4">
-            <CardHeader>
-              <CardTitle>Investment Portfolio</CardTitle>
-              <CardDescription>
-                Your current investment allocation
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <InvestmentPortfolio />
-            </CardContent>
-            <CardFooter>
-              <Link
-                href="/investments"
-                className="text-sm text-primary hover:underline"
-              >
-                View portfolio details
-              </Link>
-            </CardFooter>
-          </Card>
+          {contentCards.slice(2, 4).map((card, index) => (
+            <Card key={index} className={`${card.cols} z-40`}>
+              <CardHeader>
+                <CardTitle className="text-[#0078ff] text-lg">
+                  {card.title}
+                </CardTitle>
+                <CardDescription className="text-base">
+                  {card.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>{card.content}</CardContent>
+              {card.footer && (
+                <CardFooter
+                  className={`flex justify-center ${
+                    card.title === "Investment Portfolio" ? "mt-8" : ""
+                  }`}
+                >
+                  {card.footer}
+                </CardFooter>
+              )}
+            </Card>
+          ))}
         </div>
       </main>
     </div>
   );
 };
+
+export default Home;

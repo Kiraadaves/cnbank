@@ -10,53 +10,21 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { SavingsGoals } from "@/components/savings-goals";
-import { MobileNav } from "@/components/mobile-nav";
+import SavingsGoals from "@/components/savings-goals";
+import Navbar from "@/components/mobile-nav";
 
-export const SavingsPage = () => {
+const SavingsPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 flex h-16 items-center gap-4 border-b bg-gradient-to-r from-[#0078ff] to-[#00a3ff] text-white px-4 md:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-semibold text-white"
-        >
-          <TrendingUp className="h-6 w-6 text-white" />
-          <span>WealthWise</span>
-        </Link>
-        <nav className="ml-auto hidden items-center gap-4 md:flex">
-          <Link
-            href="/"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="/investments"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Investments
-          </Link>
-          <Link href="/savings" className="text-sm font-medium text-white">
-            Savings
-          </Link>
-          <Link
-            href="/profile"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Profile
-          </Link>
-        </nav>
-        <MobileNav />
-      </header>
+      <Navbar />
       <main className="flex-1 space-y-4 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link
               href="/"
-              className="mr-2 inline-flex items-center justify-center rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              className="mr-2 inline-flex items-center justify-center rounded-full p-1 bg-[#00a3ff]"
             >
-              <ArrowLeft className="h-4 w-4" />
+              <ArrowLeft className="h-6 w-6 text-[#ffffff]" />
               <span className="sr-only">Back to Dashboard</span>
             </Link>
             <h1 className="text-2xl font-bold tracking-tight">Savings</h1>
@@ -76,9 +44,9 @@ export const SavingsPage = () => {
               <PiggyBank className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$12,781.89</div>
+              <div className="text-2xl font-bold">₦12,781.89</div>
               <p className="text-xs text-muted-foreground">
-                +$1,200.00 this month
+                +₦1,200.00 this month
               </p>
             </CardContent>
           </Card>
@@ -90,7 +58,7 @@ export const SavingsPage = () => {
               <PiggyBank className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$1,200.00</div>
+              <div className="text-2xl font-bold">₦1,200.00</div>
               <p className="text-xs text-muted-foreground">
                 20% of monthly income
               </p>
@@ -104,7 +72,7 @@ export const SavingsPage = () => {
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$342.50</div>
+              <div className="text-2xl font-bold">₦342.50</div>
               <p className="text-xs text-muted-foreground">This year</p>
             </CardContent>
           </Card>
@@ -161,7 +129,7 @@ export const SavingsPage = () => {
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium">$1,200.00</p>
+                    <p className="text-sm font-medium">₦1,200.00</p>
                     <p className="text-xs text-green-500">+20% of income</p>
                   </div>
                 </div>
@@ -173,7 +141,7 @@ export const SavingsPage = () => {
                     <p className="text-xs text-muted-foreground">Last Month</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium">$1,200.00</p>
+                    <p className="text-sm font-medium">₦1,200.00</p>
                     <p className="text-xs text-green-500">+20% of income</p>
                   </div>
                 </div>
@@ -187,7 +155,7 @@ export const SavingsPage = () => {
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium">$1,000.00</p>
+                    <p className="text-sm font-medium">₦1,000.00</p>
                     <p className="text-xs text-green-500">+16.7% of income</p>
                   </div>
                 </div>
@@ -201,7 +169,7 @@ export const SavingsPage = () => {
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium">$800.00</p>
+                    <p className="text-sm font-medium">₦800.00</p>
                     <p className="text-xs text-green-500">+13.3% of income</p>
                   </div>
                 </div>
@@ -215,7 +183,7 @@ export const SavingsPage = () => {
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium">$800.00</p>
+                    <p className="text-sm font-medium">₦800.00</p>
                     <p className="text-xs text-green-500">+13.3% of income</p>
                   </div>
                 </div>
@@ -275,7 +243,7 @@ export const SavingsPage = () => {
                       </p>
                       <p className="text-xs text-muted-foreground mt-1">
                         Moving your emergency fund to a high-yield savings
-                        account could earn you an additional $120 per year in
+                        account could earn you an additional ₦120 per year in
                         interest.
                       </p>
                     </div>
@@ -289,3 +257,5 @@ export const SavingsPage = () => {
     </div>
   );
 };
+
+export default SavingsPage;

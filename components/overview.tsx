@@ -11,8 +11,25 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export function Overview() {
-  const [data, setData] = useState([]);
+interface StockDataPoint {
+  date: string;
+  value: number;
+}
+
+interface AlphaVantageResponse {
+  "Time Series (Daily)": {
+    [date: string]: {
+      "1. open": string;
+      "2. high": string;
+      "3. low": string;
+      "4. close": string;
+      "5. volume": string;
+    };
+  };
+}
+
+const Overview = () => {
+  const [data, setData] = useState<StockDataPoint[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,7 +37,6 @@ export function Overview() {
     const fetchStockData = async () => {
       setLoading(true);
       try {
-        // Alpha Vantage API - Free tier (limited to 5 API calls per minute and 500 per day)
         const response = await fetch(
           `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPY&apikey=demo`
         );
@@ -29,35 +45,29 @@ export function Overview() {
           throw new Error("Failed to fetch data");
         }
 
-        const result = await response.json();
+        const result: AlphaVantageResponse = await response.json();
 
-        // Check if we have the expected data structure
         if (result["Time Series (Daily)"]) {
-          // Transform the data for our chart
           const timeSeriesData = result["Time Series (Daily)"];
           const formattedData = Object.entries(timeSeriesData)
-            .slice(0, 30) // Get last 30 days
-            .map(([date, values]: [string, any]) => ({
+            .slice(0, 30)
+            .map(([date, values]) => ({
               date: new Date(date).toLocaleDateString("en-US", {
                 month: "short",
                 day: "numeric",
               }),
               value: Number.parseFloat(values["4. close"]),
             }))
-            .reverse(); // Chronological order
+            .reverse();
 
           setData(formattedData);
         } else {
-          // If API limit is reached, fall back to mock data
-          console.log(
-            "API limit reached or unexpected response format, using mock data"
-          );
+          console.log("API limit reached, using mock data");
           generateMockData();
         }
       } catch (error) {
-        console.error("Failed to fetch portfolio data:", error);
+        console.error("Failed to fetch data:", error);
         setError("Failed to load data. Using sample data instead.");
-        // Fall back to mock data
         generateMockData();
       } finally {
         setLoading(false);
@@ -65,12 +75,10 @@ export function Overview() {
     };
 
     const generateMockData = () => {
-      // Mock data for demonstration
-      const mockData = Array.from({ length: 30 }, (_, i) => {
+      const mockData: StockDataPoint[] = Array.from({ length: 30 }, (_, i) => {
         const date = new Date();
         date.setDate(date.getDate() - (30 - i));
 
-        // Create some realistic looking fluctuations
         const baseValue = 32000;
         const randomFactor =
           Math.sin(i * 0.3) * 1000 + (Math.random() - 0.5) * 800;
@@ -124,12 +132,12 @@ export function Overview() {
             tickLine={false}
             axisLine={false}
             tick={{ fontSize: 12 }}
-            tickFormatter={(value) => `$${value.toLocaleString()}`}
+            tickFormatter={(value) => `₦${value.toLocaleString()}`}
             width={80}
           />
           <Tooltip
             formatter={(value) => [
-              `$${value.toLocaleString()}`,
+              `₦${Number(value).toLocaleString()}`,
               "Portfolio Value",
             ]}
             labelFormatter={(label) => `Date: ${label}`}
@@ -146,4 +154,6 @@ export function Overview() {
       </ResponsiveContainer>
     </div>
   );
-}
+};
+
+export default Overview;
