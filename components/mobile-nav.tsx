@@ -43,7 +43,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 flex h-16 md:h-24 items-center gap-4 border-b bg-gradient-to-r from-[#00a3ff] to-[#0078ff] text-white  px-4 md:px-16">
       <Link
         href="/"
-        className="flex items-center gap-2 font-semibold text-white"
+        className=" flex items-center gap-2 font-semibold text-white"
       >
         <TrendingUp className="md:h-12 md:w-12 h-8 w-8 text-white" />
         <span className="md:text-3xl font-bold text-lg">CNSave</span>

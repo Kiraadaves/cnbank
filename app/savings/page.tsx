@@ -103,8 +103,8 @@ const SavingsPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      <main className="flex-1 space-y-4 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white">
-        <div className="flex items-center justify-between">
+      <main className="flex-1 space-y-4 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white ">
+        <div className="flex items-center justify-between ">
           <div className="flex items-center">
             <Link
               href="/"
@@ -124,7 +124,7 @@ const SavingsPage = () => {
         {/* Savings Metrics Cards */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {savingsMetrics.map((metric, index) => (
-            <Card key={index}>
+            <Card key={index} className="animate__animated animate__zoomIn">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-base text-[#0078ff] font-medium">
                   {metric.title}
@@ -142,7 +142,7 @@ const SavingsPage = () => {
         </div>
 
         {/* Savings Goals Card */}
-        <Card>
+        <Card className="animate__animated animate__slideInUp">
           <CardHeader>
             <CardTitle className="text-lg text-[#0078ff]">
               Savings Goals

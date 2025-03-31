@@ -132,7 +132,7 @@ const InvestmentsPage = () => {
     <div className="flex min-h-screen flex-col">
       <Navbar />
       <main className="flex-1 space-y-4 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white">
-        <div className="flex items-center">
+        <div className="flex items-center animate__animated animate__zoomIn">
           <Link
             href="/"
             className="mr-2 inline-flex items-center justify-center rounded-full p-1 bg-black"
@@ -144,7 +144,7 @@ const InvestmentsPage = () => {
         </div>
 
         <Tabs defaultValue="overview" className="space-y-4">
-          <TabsList className="space-x-4">
+          <TabsList className="space-x-4 animate__animated animate__zoomIn">
             {tabs.map((tab) => (
               <TabsTrigger
                 key={tab.value}
@@ -160,7 +160,7 @@ const InvestmentsPage = () => {
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {investmentMetrics.map((metric, index) => (
-                <Card key={index}>
+                <Card key={index} className="animate__animated animate__zoomIn">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-base text-[#00a3ff] font-medium">
                       {metric.title}
@@ -179,7 +179,7 @@ const InvestmentsPage = () => {
               ))}
             </div>
 
-            <Card>
+            <Card className="animate__animated animate__zoomIn">
               <CardHeader>
                 <CardTitle>Portfolio Performance</CardTitle>
                 <CardDescription>
@@ -192,7 +192,10 @@ const InvestmentsPage = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="allocation" className="space-y-4">
+          <TabsContent
+            value="allocation"
+            className="space-y-4 animate__animated animate__zoomIn"
+          >
             <Card className="h-[410px]">
               <CardHeader>
                 <CardTitle className="text-lg text-[#0078ff]">

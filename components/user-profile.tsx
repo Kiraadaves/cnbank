@@ -93,7 +93,7 @@ const UserProfile = () => {
   if (!userData) return null;
 
   return (
-    <Card className="bg-[#ffffff]">
+    <Card className="bg-[#ffffff] animate__animated animate__slideInDown">
       <CardContent className="p-6">
         {error && <div className="mb-4 text-sm text-amber-600">{error}</div>}
         <div className="flex flex-col items-center gap-4 md:flex-row">

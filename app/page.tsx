@@ -130,7 +130,7 @@ const Home = () => {
         ))}
 
         <div className="flex items-center justify-between z-40">
-          <h1 className="md:text-3xl text-2xl font-bold tracking-tight z-40">
+          <h1 className="animate__animated animate__backInLeft md:text-3xl text-2xl font-bold tracking-tight z-40">
             Dashboard
           </h1>
           <div className="flex items-center gap-2 z-40">
@@ -147,7 +147,10 @@ const Home = () => {
         {/* Stats cards */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 z-40">
           {statCards.map((card, index) => (
-            <Card key={index} className="z-40">
+            <Card
+              key={index}
+              className="z-40 animate__animated animate__zoomIn"
+            >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-lg text-[#0078ff] font-medium">
                   {card.title}
@@ -169,7 +172,10 @@ const Home = () => {
         {/* Main content cards */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
           {contentCards.slice(0, 2).map((card, index) => (
-            <Card key={index} className={`${card.cols} z-40`}>
+            <Card
+              key={index}
+              className={`${card.cols} z-40 animate__animated animate__slideInUp`}
+            >
               <CardHeader>
                 <CardTitle className="text-[#0078ff] text-lg">
                   {card.title}

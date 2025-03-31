@@ -215,7 +215,7 @@ const ProfilePage = () => {
           className="space-y-4  md:max-w-6xl md:mx-auto"
         >
           <div className="flex justify-center">
-            <TabsList className="bg-[#ffffff] py-6 px-4 border shadow-md border-gray-300">
+            <TabsList className="bg-[#ffffff] py-6 px-4 border shadow-md border-gray-300 animate__animated animate__slideInUp">
               {tabs.map((tab) => (
                 <TabsTrigger
                   key={tab.value}
@@ -231,7 +231,7 @@ const ProfilePage = () => {
 
           <TabsContent value="account" className="space-y-4">
             {/* Personal Information Card */}
-            <Card>
+            <Card className="animate__animated animate__slideInUp">
               <CardHeader>
                 <CardTitle className="text-lg text-[#00a3ff]">
                   Personal Information
@@ -260,7 +260,7 @@ const ProfilePage = () => {
             </Card>
 
             {/* Preferences Card */}
-            <Card>
+            <Card className="animate__animated animate__slideInUp">
               <CardHeader>
                 <CardTitle className="text-lg text-[#00a3ff]">
                   Preferences
@@ -302,7 +302,7 @@ const ProfilePage = () => {
           </TabsContent>
 
           <TabsContent value="notifications" className="space-y-4">
-            <Card>
+            <Card className="animate__animated animate__zoomIn">
               <CardHeader>
                 <CardTitle className="text-lg text-[#00a3ff]">
                   Notification Settings
@@ -364,7 +364,7 @@ const ProfilePage = () => {
 
           <TabsContent value="security" className="space-y-4">
             {/* Password Card */}
-            <Card>
+            <Card className="animate__animated animate__zoomIn">
               <CardHeader>
                 <CardTitle className="text-lg text-[#00a3ff]">
                   Password
@@ -391,7 +391,7 @@ const ProfilePage = () => {
             </Card>
 
             {/* 2FA Card */}
-            <Card>
+            <Card className="animate__animated animate__zoomIn">
               <CardHeader>
                 <CardTitle className="text-lg text-[#00a3ff]">
                   Two-Factor Authentication
@@ -440,7 +440,7 @@ const ProfilePage = () => {
 
           <TabsContent value="payment" className="space-y-4">
             {/* Payment Methods Card */}
-            <Card>
+            <Card className="animate__animated animate__zoomIn">
               <CardHeader>
                 <CardTitle className="text-lg text-[#00a3ff]">
                   Payment Methods
@@ -487,7 +487,7 @@ const ProfilePage = () => {
             </Card>
 
             {/* Billing Information Card */}
-            <Card>
+            <Card className="animate__animated animate__zoomIn">
               <CardHeader>
                 <CardTitle className="text-lg text-[#00a3ff]">
                   Billing Information
