@@ -119,7 +119,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="flex min-h-screen flex-col w-full">
+    <div className="flex min-h-screen flex-col w-full pb-12">
       <Navbar />
       <main className="relative flex-1 space-y-8  md:pt-12 pt-8 px-4 md:px-16 bg-gradient-to-b from-blue-50 to-white">
         {balls.map((ball, index) => (
