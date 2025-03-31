@@ -20,28 +20,28 @@ const Home = () => {
   const statCards = [
     {
       title: "Total Balance",
-      icon: <DollarSign className="h-7 w-7 text-[#0078ff]" />,
+      icon: <DollarSign className="h-7 w-7 text-[#ffffff]" />,
       value: "₦45,231.89",
       description: "+20.1% from last month",
       class: "text-black",
     },
     {
       title: "Investments",
-      icon: <BarChart3 className="h-7 w-7 text-[#0078ff]" />,
+      icon: <BarChart3 className="h-7 w-7 text-[#ffffff]" />,
       value: "₦32,450.00",
       description: "+4.3% overall return",
       class: "text-yellow-500",
     },
     {
       title: "Savings",
-      icon: <PiggyBank className="h-7 w-7 text-[#0078ff]" />,
+      icon: <PiggyBank className="h-7 w-7 text-[#ffffff]" />,
       value: "₦12,781.89",
       description: "+₦1,200.00 this month",
       class: "text-green-500",
     },
     {
       title: "Monthly Spending",
-      icon: <DollarSign className="h-7 w-7 text-[#0078ff]" />,
+      icon: <DollarSign className="h-7 w-7 text-[#ffffff]" />,
       value: "₦3,352.40",
       description: "-12.5% from last month",
       class: "text-red-500",
@@ -130,13 +130,13 @@ const Home = () => {
         ))}
 
         <div className="flex items-center justify-between z-40">
-          <h1 className="md:text-3xl text-2xl font-bold tracking-tight">
+          <h1 className="md:text-3xl text-2xl font-bold tracking-tight z-40">
             Dashboard
           </h1>
           <div className="flex items-center gap-2 z-40">
             <Link
               href="/profile"
-              className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary z-40"
             >
               <User className="h-6 w-6" />
               <span className="hidden md:inline text-xl">Chinwe Nwankwo</span>
@@ -152,7 +152,9 @@ const Home = () => {
                 <CardTitle className="text-lg text-[#0078ff] font-medium">
                   {card.title}
                 </CardTitle>
-                {card.icon}
+                <div className="bg-[#0078ff] h-16 w-16 rounded-full flex items-center justify-center">
+                  {card.icon}
+                </div>
               </CardHeader>
               <CardContent>
                 <p className={`${card.class} text-2xl font-bold`}>

@@ -51,18 +51,18 @@ const UserProfile = () => {
         // Set default user data
         setUserData({
           name: {
-            first: "John",
-            last: "Doe",
+            first: "Chinwe",
+            last: "Nwankwo",
           },
-          email: "john.doe@example.com",
-          phone: "+1 (555) 123-4567",
+          email: "chukwuogorchinwe@gmail.com",
+          phone: "+234 806 120 0946",
           picture: {
             large: "/placeholder.svg?height=128&width=128",
           },
           location: {
-            city: "Anytown",
-            state: "CA",
-            country: "USA",
+            city: "Surulere",
+            state: "Lagos",
+            country: "Nigeria",
           },
         });
       } finally {
@@ -93,7 +93,7 @@ const UserProfile = () => {
   if (!userData) return null;
 
   return (
-    <Card className="bg-gradient-to-r from-blue-50 to-white border-blue-100">
+    <Card className="bg-[#ffffff]">
       <CardContent className="p-6">
         {error && <div className="mb-4 text-sm text-amber-600">{error}</div>}
         <div className="flex flex-col items-center gap-4 md:flex-row">
@@ -118,7 +118,7 @@ const UserProfile = () => {
             </p>
           </div>
           <div className="ml-auto hidden md:block">
-            <div className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            <div className="rounded-full bg-amber-400 p-3 text-xs font-bold text-[#3b3333]">
               Premium Account
             </div>
           </div>

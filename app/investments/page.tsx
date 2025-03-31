@@ -135,7 +135,7 @@ const InvestmentsPage = () => {
         <div className="flex items-center">
           <Link
             href="/"
-            className="mr-2 inline-flex items-center justify-center rounded-full p-1 bg-[#00a3ff]"
+            className="mr-2 inline-flex items-center justify-center rounded-full p-1 bg-black"
           >
             <ArrowLeft className="h-6 w-6 text-[#ffffff]" />
             <span className="sr-only">Back to Dashboard</span>

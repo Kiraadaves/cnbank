@@ -46,7 +46,7 @@ const Navbar = () => {
         className="flex items-center gap-2 font-semibold text-white"
       >
         <TrendingUp className="md:h-12 md:w-12 h-8 w-8 text-white" />
-        <span className="md:text-3xl font-bold text-lg">CNBank</span>
+        <span className="md:text-3xl font-bold text-lg">CNSave</span>
       </Link>
 
       {/* Desktop Navigation */}
@@ -74,7 +74,7 @@ const Navbar = () => {
         </SheetTrigger>
         <SheetContent side="left" className="w-[240px] sm:w-[300px] pl-6">
           <SheetHeader>
-            <SheetTitle className="sr-only">CNBank Navigation</SheetTitle>
+            <SheetTitle className="sr-only">CNSave Navigation</SheetTitle>
           </SheetHeader>
           <div className="flex flex-col gap-6 py-4">
             {/* Mobile Logo */}
@@ -84,7 +84,7 @@ const Navbar = () => {
               onClick={() => setMobileOpen(false)}
             >
               <TrendingUp className="h-6 w-6 text-[#0078ff]" />
-              <span className="text-[#0078ff] text-lg font-bold">CNBank</span>
+              <span className="text-[#0078ff] text-lg font-bold">CNSave</span>
             </Link>
 
             {/* Mobile Navigation Links */}

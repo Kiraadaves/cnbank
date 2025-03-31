@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowLeft, User, Bell, Shield, CreditCard, Plus } from "lucide-react";
-
 import {
   Card,
   CardContent,
@@ -17,6 +16,182 @@ import UserProfile from "@/components/user-profile";
 import Navbar from "@/components/mobile-nav";
 
 const ProfilePage = () => {
+  // Tab configuration
+  const tabs = [
+    { value: "account", icon: User, label: "Account" },
+    { value: "notifications", icon: Bell, label: "Notifications" },
+    { value: "security", icon: Shield, label: "Security" },
+    { value: "payment", icon: CreditCard, label: "Payment" },
+  ];
+
+  // Personal information fields
+  const personalInfoFields = [
+    {
+      id: "first-name",
+      label: "First Name",
+      defaultValue: "John",
+      type: "text",
+      colSpan: "md:col-span-1",
+    },
+    {
+      id: "last-name",
+      label: "Last Name",
+      defaultValue: "Doe",
+      type: "text",
+      colSpan: "md:col-span-1",
+    },
+    {
+      id: "email",
+      label: "Email",
+      defaultValue: "john.doe@example.com",
+      type: "email",
+      colSpan: "md:col-span-2",
+    },
+    {
+      id: "phone",
+      label: "Phone Number",
+      defaultValue: "+1 (555) 123-4567",
+      type: "tel",
+      colSpan: "md:col-span-2",
+    },
+    {
+      id: "address",
+      label: "Address",
+      defaultValue: "123 Main St, Anytown, USA 12345",
+      type: "text",
+      colSpan: "md:col-span-2",
+    },
+  ];
+
+  // Preference options
+  const preferenceOptions = [
+    {
+      id: "currency",
+      label: "Currency",
+      description: "Select your preferred currency",
+      options: ["USD (₦)", "EUR (€)", "GBP (£)", "JPY (¥)", "CAD (₦)"],
+      defaultValue: "USD (₦)",
+    },
+    {
+      id: "theme",
+      label: "Theme",
+      description: "Choose your preferred theme",
+      options: ["System Default", "Light", "Dark"],
+      defaultValue: "System Default",
+    },
+    {
+      id: "language",
+      label: "Language",
+      description: "Select your preferred language",
+      options: ["English", "Spanish", "French", "German", "Chinese"],
+      defaultValue: "English",
+    },
+  ];
+
+  // Notification settings
+  const notificationSettings = {
+    email: [
+      {
+        id: "email-transactions",
+        label: "Transaction Updates",
+        defaultChecked: true,
+      },
+      {
+        id: "email-portfolio",
+        label: "Portfolio Performance",
+        defaultChecked: true,
+      },
+      {
+        id: "email-savings",
+        label: "Savings Goal Updates",
+        defaultChecked: true,
+      },
+      { id: "email-security", label: "Security Alerts", defaultChecked: true },
+      {
+        id: "email-newsletter",
+        label: "Weekly Newsletter",
+        defaultChecked: false,
+      },
+    ],
+    push: [
+      {
+        id: "push-transactions",
+        label: "Transaction Updates",
+        defaultChecked: true,
+      },
+      {
+        id: "push-portfolio",
+        label: "Portfolio Performance",
+        defaultChecked: true,
+      },
+      {
+        id: "push-savings",
+        label: "Savings Goal Updates",
+        defaultChecked: false,
+      },
+      { id: "push-security", label: "Security Alerts", defaultChecked: true },
+      { id: "push-tips", label: "Financial Tips", defaultChecked: false },
+    ],
+  };
+
+  // Payment methods
+  const paymentMethods = [
+    {
+      id: 1,
+      type: "Visa",
+      lastFour: "4242",
+      expires: "04/2026",
+      icon: <CreditCard className="h-4 w-4 text-green-500" />,
+    },
+    {
+      id: 2,
+      type: "Mastercard",
+      lastFour: "5555",
+      expires: "08/2025",
+      icon: <CreditCard className="h-4 w-4 text-yellow-600" />,
+    },
+  ];
+
+  // Billing information fields
+  const billingInfoFields = [
+    {
+      id: "billing-name",
+      label: "Name",
+      defaultValue: "John Doe",
+      colSpan: "md:col-span-2",
+    },
+    {
+      id: "billing-address",
+      label: "Billing Address",
+      defaultValue: "123 Main St",
+      colSpan: "md:col-span-2",
+    },
+    {
+      id: "billing-city",
+      label: "City",
+      defaultValue: "Anytown",
+      colSpan: "md:col-span-1",
+    },
+    {
+      id: "billing-state",
+      label: "State",
+      defaultValue: "CA",
+      colSpan: "md:col-span-1",
+    },
+    {
+      id: "billing-zip",
+      label: "ZIP Code",
+      defaultValue: "12345",
+      colSpan: "md:col-span-1",
+    },
+    {
+      id: "billing-country",
+      label: "Country",
+      defaultValue: "United States",
+      colSpan: "md:col-span-1",
+    },
+  ];
+
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -24,7 +199,7 @@ const ProfilePage = () => {
         <div className="flex items-center">
           <Link
             href="/"
-            className="mr-2 inline-flex items-center justify-center rounded-full p-1 bg-[#00a3ff]"
+            className="mr-2 inline-flex items-center justify-center rounded-full p-1 bg-black"
           >
             <ArrowLeft className="h-6 w-6 text-[#ffffff]" />
             <span className="sr-only">Back to Dashboard</span>
@@ -35,132 +210,93 @@ const ProfilePage = () => {
         </div>
 
         <UserProfile />
-
-        <Tabs defaultValue="account" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="account" className="flex items-center gap-2">
-              <User className="h-4 w-4" />
-              <span>Account</span>
-            </TabsTrigger>
-            <TabsTrigger
-              value="notifications"
-              className="flex items-center gap-2"
-            >
-              <Bell className="h-4 w-4" />
-              <span>Notifications</span>
-            </TabsTrigger>
-            <TabsTrigger value="security" className="flex items-center gap-2">
-              <Shield className="h-4 w-4" />
-              <span>Security</span>
-            </TabsTrigger>
-            <TabsTrigger value="payment" className="flex items-center gap-2">
-              <CreditCard className="h-4 w-4" />
-              <span>Payment</span>
-            </TabsTrigger>
-          </TabsList>
+        <Tabs
+          defaultValue="account"
+          className="space-y-4  md:max-w-6xl md:mx-auto"
+        >
+          <div className="flex justify-center">
+            <TabsList className="bg-[#ffffff] py-6 px-4 border shadow-md border-gray-300">
+              {tabs.map((tab) => (
+                <TabsTrigger
+                  key={tab.value}
+                  value={tab.value}
+                  className="flex items-center gap-2 p-4"
+                >
+                  <tab.icon className="h-6 w-6" />
+                  <span className="text-base">{tab.label}</span>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
 
           <TabsContent value="account" className="space-y-4">
+            {/* Personal Information Card */}
             <Card>
               <CardHeader>
-                <CardTitle>Personal Information</CardTitle>
-                <CardDescription>Update your account details</CardDescription>
+                <CardTitle className="text-lg text-[#00a3ff]">
+                  Personal Information
+                </CardTitle>
+                <CardDescription className="text-gray-800">
+                  Update your account details
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="first-name">First Name</Label>
-                    <Input id="first-name" defaultValue="John" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="last-name">Last Name</Label>
-                    <Input id="last-name" defaultValue="Doe" />
-                  </div>
+                  {personalInfoFields.map((field) => (
+                    <div key={field.id} className={field.colSpan}>
+                      <div className="space-y-2">
+                        <Label htmlFor={field.id}>{field.label}</Label>
+                        <Input
+                          id={field.id}
+                          type={field.type}
+                          defaultValue={field.defaultValue}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    defaultValue="john.doe@example.com"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    defaultValue="+1 (555) 123-4567"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="address">Address</Label>
-                  <Input
-                    id="address"
-                    defaultValue="123 Main St, Anytown, USA 12345"
-                  />
-                </div>
-                <Button>Save Changes</Button>
+                <Button className="bg-[#00a3ff]">Save Changes</Button>
               </CardContent>
             </Card>
 
+            {/* Preferences Card */}
             <Card>
               <CardHeader>
-                <CardTitle>Preferences</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-lg text-[#00a3ff]">
+                  Preferences
+                </CardTitle>
+                <CardDescription className="text-gray-800">
                   Manage your account preferences
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="currency">Currency</Label>
-                    <p className="text-xs text-muted-foreground">
-                      Select your preferred currency
-                    </p>
+                {preferenceOptions.map((option) => (
+                  <div
+                    key={option.id}
+                    className="flex items-center justify-between"
+                  >
+                    <div className="space-y-0.5">
+                      <Label htmlFor={option.id}>{option.label}</Label>
+                      <p className="text-sm text-muted-foreground">
+                        {option.description}
+                      </p>
+                    </div>
+                    <div className="w-[180px]">
+                      <select
+                        id={option.id}
+                        className="w-full rounded-md border border-input bg-background px-3 py-3 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        defaultValue={option.defaultValue}
+                      >
+                        {option.options.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
-                  <div className="w-[180px]">
-                    <select className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                      <option>USD (₦)</option>
-                      <option>EUR (€)</option>
-                      <option>GBP (£)</option>
-                      <option>JPY (¥)</option>
-                      <option>CAD (₦)</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="theme">Theme</Label>
-                    <p className="text-xs text-muted-foreground">
-                      Choose your preferred theme
-                    </p>
-                  </div>
-                  <div className="w-[180px]">
-                    <select className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                      <option>System Default</option>
-                      <option>Light</option>
-                      <option>Dark</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label>Language</Label>
-                    <p className="text-xs text-muted-foreground">
-                      Select your preferred language
-                    </p>
-                  </div>
-                  <div className="w-[180px]">
-                    <select className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                      <option>English</option>
-                      <option>Spanish</option>
-                      <option>French</option>
-                      <option>German</option>
-                      <option>Chinese</option>
-                    </select>
-                  </div>
-                </div>
-                <Button>Save Preferences</Button>
+                ))}
+                <Button className="bg-[#00a3ff]">Save Preferences</Button>
               </CardContent>
             </Card>
           </TabsContent>
@@ -168,93 +304,74 @@ const ProfilePage = () => {
           <TabsContent value="notifications" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Notification Settings</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-lg text-[#00a3ff]">
+                  Notification Settings
+                </CardTitle>
+                <CardDescription className="text-gray-800">
                   Manage how you receive notifications
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-4">
-                  <h3 className="text-sm font-medium">Email Notifications</h3>
+                  <h3 className="text-base font-medium text-[#00a3ff]">
+                    Email Notifications
+                  </h3>
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="email-transactions" className="flex-1">
-                        Transaction Updates
-                      </Label>
-                      <Switch id="email-transactions" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="email-portfolio" className="flex-1">
-                        Portfolio Performance
-                      </Label>
-                      <Switch id="email-portfolio" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="email-savings" className="flex-1">
-                        Savings Goal Updates
-                      </Label>
-                      <Switch id="email-savings" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="email-security" className="flex-1">
-                        Security Alerts
-                      </Label>
-                      <Switch id="email-security" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="email-newsletter" className="flex-1">
-                        Weekly Newsletter
-                      </Label>
-                      <Switch id="email-newsletter" />
-                    </div>
+                    {notificationSettings.email.map((setting) => (
+                      <div
+                        key={setting.id}
+                        className="flex items-center justify-between"
+                      >
+                        <Label htmlFor={setting.id} className="flex-1">
+                          {setting.label}
+                        </Label>
+                        <Switch
+                          id={setting.id}
+                          defaultChecked={setting.defaultChecked}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="text-sm font-medium">Push Notifications</h3>
+                  <h3 className="text-base font-medium text-[#00a3ff]">
+                    Push Notifications
+                  </h3>
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="push-transactions" className="flex-1">
-                        Transaction Updates
-                      </Label>
-                      <Switch id="push-transactions" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="push-portfolio" className="flex-1">
-                        Portfolio Performance
-                      </Label>
-                      <Switch id="push-portfolio" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="push-savings" className="flex-1">
-                        Savings Goal Updates
-                      </Label>
-                      <Switch id="push-savings" />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="push-security" className="flex-1">
-                        Security Alerts
-                      </Label>
-                      <Switch id="push-security" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="push-tips" className="flex-1">
-                        Financial Tips
-                      </Label>
-                      <Switch id="push-tips" />
-                    </div>
+                    {notificationSettings.push.map((setting) => (
+                      <div
+                        key={setting.id}
+                        className="flex items-center justify-between"
+                      >
+                        <Label htmlFor={setting.id} className="flex-1">
+                          {setting.label}
+                        </Label>
+                        <Switch
+                          id={setting.id}
+                          defaultChecked={setting.defaultChecked}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <Button>Save Notification Settings</Button>
+                <Button className="bg-[#00a3ff]">
+                  Save Notification Settings
+                </Button>
               </CardContent>
             </Card>
           </TabsContent>
 
           <TabsContent value="security" className="space-y-4">
+            {/* Password Card */}
             <Card>
               <CardHeader>
-                <CardTitle>Password</CardTitle>
-                <CardDescription>Change your password</CardDescription>
+                <CardTitle className="text-lg text-[#00a3ff]">
+                  Password
+                </CardTitle>
+                <CardDescription className="text-gray-800">
+                  Change your password
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
@@ -269,20 +386,23 @@ const ProfilePage = () => {
                   <Label htmlFor="confirm-password">Confirm New Password</Label>
                   <Input id="confirm-password" type="password" />
                 </div>
-                <Button>Update Password</Button>
+                <Button className="bg-[#00a3ff]">Update Password</Button>
               </CardContent>
             </Card>
 
+            {/* 2FA Card */}
             <Card>
               <CardHeader>
-                <CardTitle>Two-Factor Authentication</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-lg text-[#00a3ff]">
+                  Two-Factor Authentication
+                </CardTitle>
+                <CardDescription className="text-gray-800">
                   Add an extra layer of security to your account
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
+                  <div className="space-y-1">
                     <Label>Two-Factor Authentication</Label>
                     <p className="text-xs text-muted-foreground">
                       Secure your account with 2FA
@@ -295,10 +415,9 @@ const ProfilePage = () => {
                     <p className="text-sm font-medium">Recovery Codes</p>
                     <p className="text-xs text-muted-foreground">
                       Recovery codes can be used to access your account in the
-                      event you lose access to your device and cannot receive
-                      two-factor authentication codes.
+                      event you lose access to your device.
                     </p>
-                    <Button variant="outline" size="sm" className="w-fit">
+                    <Button className="w-fit bg-[#00a3ff]">
                       View Recovery Codes
                     </Button>
                   </div>
@@ -310,7 +429,7 @@ const ProfilePage = () => {
                       Manage devices that are currently logged into your
                       account.
                     </p>
-                    <Button variant="outline" size="sm" className="w-fit">
+                    <Button className="w-fit bg-[00a3ff]">
                       Manage Devices
                     </Button>
                   </div>
@@ -320,104 +439,80 @@ const ProfilePage = () => {
           </TabsContent>
 
           <TabsContent value="payment" className="space-y-4">
+            {/* Payment Methods Card */}
             <Card>
               <CardHeader>
-                <CardTitle>Payment Methods</CardTitle>
+                <CardTitle className="text-lg text-[#00a3ff]">
+                  Payment Methods
+                </CardTitle>
                 <CardDescription>Manage your payment methods</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="rounded-lg border p-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="rounded-md bg-primary/10 p-2">
-                        <CreditCard className="h-4 w-4 text-primary" />
+                {paymentMethods.map((method) => (
+                  <div key={method.id} className="rounded-lg border p-3">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="rounded-md bg-purple-100 p-2">
+                          {method.icon}
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">
+                            {method.type} ending in {method.lastFour}
+                          </p>
+                          <p className="text-xs text-red-700">
+                            Expires {method.expires}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-medium">
-                          Visa ending in 4242
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          Expires 04/2026
-                        </p>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm">
+                          Edit
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="text-red-600"
+                        >
+                          Remove
+                        </Button>
                       </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
-                        Edit
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        Remove
-                      </Button>
                     </div>
                   </div>
-                </div>
-                <div className="rounded-lg border p-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="rounded-md bg-primary/10 p-2">
-                        <CreditCard className="h-4 w-4 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">
-                          Mastercard ending in 5555
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          Expires 08/2025
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
-                        Edit
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        Remove
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-                <Button className="flex items-center gap-2">
-                  <Plus className="h-4 w-4" />
+                ))}
+                <Button className="flex items-center gap-2 bg-[#00a3ff]">
+                  <Plus className="h-5 w-5" />
                   <span>Add Payment Method</span>
                 </Button>
               </CardContent>
             </Card>
 
+            {/* Billing Information Card */}
             <Card>
               <CardHeader>
-                <CardTitle>Billing Information</CardTitle>
-                <CardDescription>Manage your billing details</CardDescription>
+                <CardTitle className="text-lg text-[#00a3ff]">
+                  Billing Information
+                </CardTitle>
+                <CardDescription className="text-gray-800">
+                  Manage your billing details
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="billing-name">Name</Label>
-                  <Input id="billing-name" defaultValue="John Doe" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="billing-address">Billing Address</Label>
-                  <Input id="billing-address" defaultValue="123 Main St" />
-                </div>
                 <div className="grid gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="billing-city">City</Label>
-                    <Input id="billing-city" defaultValue="Anytown" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="billing-state">State</Label>
-                    <Input id="billing-state" defaultValue="CA" />
-                  </div>
+                  {billingInfoFields.map((field) => (
+                    <div key={field.id} className={field.colSpan}>
+                      <div className="space-y-2">
+                        <Label htmlFor={field.id}>{field.label}</Label>
+                        <Input
+                          id={field.id}
+                          defaultValue={field.defaultValue}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="billing-zip">ZIP Code</Label>
-                    <Input id="billing-zip" defaultValue="12345" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="billing-country">Country</Label>
-                    <Input id="billing-country" defaultValue="United States" />
-                  </div>
-                </div>
-                <Button>Save Billing Information</Button>
+                <Button className="bg-[#00a3ff]">
+                  Save Billing Information
+                </Button>
               </CardContent>
             </Card>
           </TabsContent>
