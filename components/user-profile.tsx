@@ -31,7 +31,7 @@ const UserProfile = () => {
     const fetchUserData = async () => {
       setLoading(true);
       try {
-        // Random User Generator API - Free API with no key required
+        // Random User Generator API
         const response = await fetch("https://randomuser.me/api/?nat=us");
 
         if (!response.ok) {
@@ -48,7 +48,6 @@ const UserProfile = () => {
       } catch (error) {
         console.error("Failed to fetch user data:", error);
         setError("Failed to load user profile. Using default profile.");
-        // Set default user data
         setUserData({
           name: {
             first: "Chinwe",

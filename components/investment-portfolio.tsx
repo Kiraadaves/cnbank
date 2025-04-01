@@ -34,7 +34,7 @@ const InvestmentPortfolio = () => {
 
         const result: CoinGeckoCoin[] = await response.json();
 
-        // Transform the data for our pie chart
+        // Transform the data for my pie chart
         if (result && result.length > 0) {
           const colors = [
             "hsl(210, 100%, 50%)", // Primary blue
@@ -52,14 +52,12 @@ const InvestmentPortfolio = () => {
 
           setInvestments(formattedData);
         } else {
-          // Fall back to mock data
           console.log("Unexpected response format, using mock data");
           generateMockData();
         }
       } catch (error) {
         console.error("Failed to fetch investment portfolio:", error);
         setError("Failed to load data. Using sample data instead.");
-        // Fall back to mock data
         generateMockData();
       } finally {
         setLoading(false);
@@ -67,7 +65,6 @@ const InvestmentPortfolio = () => {
     };
 
     const generateMockData = () => {
-      // Mock data for demonstration
       const mockInvestments = [
         { name: "Stocks", value: 18500, color: "hsl(210, 100%, 50%)" }, // Primary blue
         { name: "Bonds", value: 6200, color: "hsl(220, 85%, 65%)" }, // Lighter blue

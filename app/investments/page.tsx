@@ -131,13 +131,13 @@ const InvestmentsPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      <main className="flex-1 space-y-4 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white">
+      <main className="flex-1 space-y-4 md:space-y-8 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white">
         <div className="flex items-center animate__animated animate__zoomIn">
           <Link
             href="/"
-            className="mr-2 inline-flex items-center justify-center rounded-full p-1 bg-black"
+            className="mr-2 inline-flex items-center justify-center rounded-full p-1"
           >
-            <ArrowLeft className="h-6 w-6 text-[#ffffff]" />
+            <ArrowLeft className="h-6 w-6 text-black" />
             <span className="sr-only">Back to Dashboard</span>
           </Link>
           <h1 className="text-2xl md:text-3xl font-bold">Investments</h1>

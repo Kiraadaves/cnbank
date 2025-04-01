@@ -13,7 +13,7 @@ import SavingsGoals from "@/components/savings-goals";
 import Navbar from "@/components/mobile-nav";
 
 const SavingsPage = () => {
-  // Savings metrics cards data
+  // Savings metrics
   const savingsMetrics = [
     {
       title: "Total Savings",
@@ -41,7 +41,7 @@ const SavingsPage = () => {
     },
   ];
 
-  // Savings history data
+  // Savings history
   const savingsHistory = [
     {
       month: "March 2025",
@@ -75,7 +75,7 @@ const SavingsPage = () => {
     },
   ];
 
-  // Savings tips data
+  // Savings tips
   const savingsTips = [
     {
       icon: PiggyBank,
@@ -103,14 +103,14 @@ const SavingsPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      <main className="flex-1 space-y-4 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white ">
+      <main className="flex-1 space-y-4 md:space-y-8 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white ">
         <div className="flex items-center justify-between ">
           <div className="flex items-center">
             <Link
               href="/"
-              className="mr-2 inline-flex items-center justify-center rounded-full p-1 bg-black"
+              className="mr-2 inline-flex items-center justify-center rounded-full p-1"
             >
-              <ArrowLeft className="h-6 w-6 text-[#ffffff]" />
+              <ArrowLeft className="h-6 w-6 text-black" />
               <span className="sr-only">Back to Dashboard</span>
             </Link>
             <h1 className="text-2xl md:text-3xl font-bold">Savings</h1>

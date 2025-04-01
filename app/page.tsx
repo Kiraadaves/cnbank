@@ -16,7 +16,7 @@ import Ball from "@/components/ball";
 import Navbar from "@/components/mobile-nav";
 
 const Home = () => {
-  // Stats cards data
+  // Stats
   const statCards = [
     {
       title: "Total Balance",
@@ -48,7 +48,7 @@ const Home = () => {
     },
   ];
 
-  // Main content cards data
+  // Main cards
   const contentCards = [
     {
       cols: "lg:col-span-4",

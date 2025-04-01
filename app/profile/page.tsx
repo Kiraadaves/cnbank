@@ -16,7 +16,7 @@ import UserProfile from "@/components/user-profile";
 import Navbar from "@/components/mobile-nav";
 
 const ProfilePage = () => {
-  // Tab configuration
+  // Tabs
   const tabs = [
     { value: "account", icon: User, label: "Account" },
     { value: "notifications", icon: Bell, label: "Notifications" },
@@ -24,7 +24,7 @@ const ProfilePage = () => {
     { value: "payment", icon: CreditCard, label: "Payment" },
   ];
 
-  // Personal information fields
+  // Personal information
   const personalInfoFields = [
     {
       id: "first-name",
@@ -63,7 +63,7 @@ const ProfilePage = () => {
     },
   ];
 
-  // Preference options
+  // Preference
   const preferenceOptions = [
     {
       id: "currency",
@@ -88,7 +88,7 @@ const ProfilePage = () => {
     },
   ];
 
-  // Notification settings
+  // Notification
   const notificationSettings = {
     email: [
       {
@@ -152,7 +152,7 @@ const ProfilePage = () => {
     },
   ];
 
-  // Billing information fields
+  // Billing
   const billingInfoFields = [
     {
       id: "billing-name",
@@ -195,13 +195,13 @@ const ProfilePage = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      <main className="flex-1 space-y-4 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white">
+      <main className="flex-1 space-y-4 md:space-y-8 p-4 pt-6 md:p-8 bg-gradient-to-b from-blue-50 to-white">
         <div className="flex items-center">
           <Link
             href="/"
-            className="mr-2 inline-flex items-center justify-center rounded-full p-1 bg-black"
+            className="mr-2 inline-flex items-center justify-center rounded-full p-1"
           >
-            <ArrowLeft className="h-6 w-6 text-[#ffffff]" />
+            <ArrowLeft className="h-6 w-6 text-black" />
             <span className="sr-only">Back to Dashboard</span>
           </Link>
           <h1 className="text-2xl font-bold tracking-tight">
@@ -214,19 +214,21 @@ const ProfilePage = () => {
           defaultValue="account"
           className="space-y-4  md:max-w-6xl md:mx-auto"
         >
-          <div className="flex justify-center">
-            <TabsList className="bg-[#ffffff] py-6 px-4 border shadow-md border-gray-300 animate__animated animate__slideInUp">
-              {tabs.map((tab) => (
-                <TabsTrigger
-                  key={tab.value}
-                  value={tab.value}
-                  className="flex items-center gap-2 p-4"
-                >
-                  <tab.icon className="h-6 w-6" />
-                  <span className="text-base">{tab.label}</span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
+          <div className="flex justify-center md:h-20 h-24">
+            <div className="bg-white rounded-[8px] py-3 px-2 md:py-6 md:px-4  shadow-md border border-gray-300 animate__animated animate__slideInUp ">
+              <TabsList className="">
+                {tabs.map((tab) => (
+                  <TabsTrigger
+                    key={tab.value}
+                    value={tab.value}
+                    className="flex items-center gap-2 p-4"
+                  >
+                    <tab.icon className="h-6 w-6" />
+                    <span className="text-base">{tab.label}</span>
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
           </div>
 
           <TabsContent value="account" className="space-y-4">
@@ -273,7 +275,7 @@ const ProfilePage = () => {
                 {preferenceOptions.map((option) => (
                   <div
                     key={option.id}
-                    className="flex items-center justify-between"
+                    className="flex flex-col md:flex-row gap-3 md:gap-0 md:items-center justify-between"
                   >
                     <div className="space-y-0.5">
                       <Label htmlFor={option.id}>{option.label}</Label>
@@ -464,7 +466,7 @@ const ProfilePage = () => {
                           </p>
                         </div>
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 flex-wrap">
                         <Button variant="outline" size="sm">
                           Edit
                         </Button>
