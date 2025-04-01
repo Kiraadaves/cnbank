@@ -1,6 +1,6 @@
 "use client";
 
-import { JSX, useEffect, useState } from "react";
+import { type JSX, useEffect, useState } from "react";
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -8,9 +8,18 @@ import {
   CreditCard,
   DollarSign,
   ShoppingBag,
+  Filter,
 } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
 
 type Transaction = {
   id: string;
@@ -32,6 +41,10 @@ const RecentTransactions = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const [filter, setFilter] = useState<
+    "all" | "deposit" | "withdrawal" | "payment"
+  >("all");
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -154,6 +167,18 @@ const RecentTransactions = () => {
     fetchTransactions();
   }, []);
 
+  const filteredTransactions = transactions.filter((transaction) => {
+    if (filter === "all") return true;
+    return transaction.type === filter;
+  });
+
+  const counts = {
+    all: transactions.length,
+    deposit: transactions.filter((t) => t.type === "deposit").length,
+    payment: transactions.filter((t) => t.type === "payment").length,
+    withdrawal: transactions.filter((t) => t.type === "withdrawal").length,
+  };
+
   if (loading) {
     return (
       <div className="space-y-4">
@@ -174,35 +199,98 @@ const RecentTransactions = () => {
   return (
     <div className="space-y-4">
       {error && <div className="mb-2 text-sm text-amber-600">{error}</div>}
-      {transactions.map((transaction) => (
-        <div key={transaction.id} className="flex items-center gap-4">
-          <Avatar className="h-9 w-9 border">
-            <AvatarFallback>
-              {transaction.icon ? (
-                transaction.icon
-              ) : (
-                <DollarSign className="h-4 w-4" />
-              )}
-            </AvatarFallback>
-          </Avatar>
-          <div className="space-y-1">
-            <p className="text-sm font-medium leading-none">
-              {transaction.description}
-            </p>
-            <p className="text-xs text-muted-foreground">{transaction.date}</p>
-          </div>
-          <div
-            className={`ml-auto text-sm font-medium ${
-              transaction.amount > 0 ? "text-green-500" : ""
-            }`}
-          >
-            {transaction.amount > 0 ? "+" : ""}₦
-            {Math.abs(transaction.amount).toFixed(2)}
-          </div>
+
+      <div className="flex justify-between items-center mb-2">
+        <div className="flex items-center gap-2">
+          {filter !== "all" && (
+            <Badge variant="outline" className="bg-green-400 text-white p-3">
+              {filter.charAt(0).toUpperCase() + filter.slice(1)}s (
+              {counts[filter]})
+            </Badge>
+          )}
         </div>
-      ))}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button className="gap-1 bg-[#0078ff] p-4 hover:bg-[#0078ff]">
+              <Filter className="h-3.5 w-3.5" />
+              <span>Filter</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem
+              onClick={() => setFilter("all")}
+              className={`hover:bg-[#0078ff] hover:text-white ${
+                filter === "all" ? "bg-[#0078ff] text-white" : ""
+              }`}
+            >
+              All Recent Transactions ({counts.all})
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setFilter("deposit")}
+              className={`hover:bg-[#0078ff] hover:text-white ${
+                filter === "deposit" ? "bg-[#0078ff] text-white" : ""
+              }`}
+            >
+              Deposits Only ({counts.deposit})
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setFilter("payment")}
+              className={`hover:bg-[#0078ff] hover:text-white ${
+                filter === "payment" ? "bg-[#0078ff] text-white" : ""
+              }`}
+            >
+              Payments Only ({counts.payment})
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setFilter("withdrawal")}
+              className={`hover:bg-[#0078ff] hover:text-white ${
+                filter === "withdrawal" ? "bg-[#0078ff] text-white" : ""
+              }`}
+            >
+              Withdrawals Only ({counts.withdrawal})
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      {filteredTransactions.length === 0 ? (
+        <div className="text-center py-4 text-sm text-muted-foreground">
+          No transactions found for this filter.
+        </div>
+      ) : (
+        filteredTransactions.map((transaction) => (
+          <div key={transaction.id} className="flex items-center gap-4">
+            <Avatar className="h-9 w-9 border">
+              <AvatarFallback>
+                {transaction.icon ? (
+                  transaction.icon
+                ) : (
+                  <DollarSign className="h-4 w-4" />
+                )}
+              </AvatarFallback>
+            </Avatar>
+            <div className="space-y-1">
+              <p className="text-sm font-medium leading-none">
+                {transaction.description}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {transaction.date}
+              </p>
+            </div>
+            <div
+              className={`ml-auto text-sm font-medium ${
+                transaction.amount > 0 ? "text-green-500" : ""
+              }`}
+            >
+              {transaction.amount > 0 ? "+" : ""}₦
+              {Math.abs(transaction.amount).toFixed(2)}
+            </div>
+          </div>
+        ))
+      )}
     </div>
   );
 };
 
 export default RecentTransactions;
+export { RecentTransactions };
