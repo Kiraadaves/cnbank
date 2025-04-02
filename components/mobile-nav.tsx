@@ -27,7 +27,7 @@ const Navbar = () => {
   const router = useRouter();
 
   const navLinks = [
-    { href: "/", text: "Dashboard", icon: Home },
+    { href: "/dashboard", text: "Dashboard", icon: Home },
     { href: "/investments", text: "Investments", icon: BarChart3 },
     { href: "/savings", text: "Savings", icon: PiggyBank },
     { href: "/profile", text: "Profile", icon: User },
