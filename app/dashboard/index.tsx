@@ -143,15 +143,15 @@ const Dashboard = () => {
           <h1 className="animate__animated animate__backInLeft md:text-3xl text-2xl font-bold tracking-tight z-40">
             Dashboard
           </h1>
-          <div className=" z-40">
+          <div className="bg-blue-50 z-40">
             <Link
               href="/profile"
               className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary z-40"
             >
-              <User className="h-6 w-6" />
+              <User className="z-40 h-6 w-6" />
               <span className="hidden md:inline text-xl">{userData.name}</span>
             </Link>
-            <p className="font-medium text-muted-foreground hidden md:block">
+            <p className="z-40 font-medium text-muted-foreground hidden md:block">
               {userData.email}
             </p>
           </div>
