@@ -47,7 +47,7 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 flex h-16 md:h-24 items-center gap-4 border-b bg-gradient-to-r from-[#00a3ff] to-[#0078ff] text-white  px-4 md:px-16">
       <Link
-        href="/"
+        href="/dashboard"
         className=" flex items-center gap-2 font-semibold text-white"
       >
         <TrendingUp className="md:h-12 md:w-12 h-8 w-8 text-white" />
@@ -90,7 +90,7 @@ const Navbar = () => {
           <div className="flex flex-col gap-6 py-4">
             {/* Mobile Logo */}
             <Link
-              href="/"
+              href="/dashboard"
               className="flex items-center gap-2 font-semibold"
               onClick={() => setMobileOpen(false)}
             >

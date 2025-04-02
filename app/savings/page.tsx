@@ -107,7 +107,7 @@ const SavingsPage = () => {
         <div className="flex items-center justify-between ">
           <div className="flex items-center">
             <Link
-              href="/"
+              href="/dashboard"
               className="mr-2 inline-flex items-center justify-center rounded-full p-1"
             >
               <ArrowLeft className="h-6 w-6 text-black" />
