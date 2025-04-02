@@ -9,6 +9,7 @@ import {
   PiggyBank,
   User,
   TrendingUp,
+  LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,11 +19,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const navLinks = [
     { href: "/", text: "Dashboard", icon: Home },
@@ -36,6 +38,10 @@ const Navbar = () => {
       return pathname === href;
     }
     return pathname.startsWith(href);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("userData");
+    router.push("/");
   };
 
   return (
@@ -61,6 +67,12 @@ const Navbar = () => {
             {link.text}
           </Link>
         ))}
+        <button
+          onClick={handleLogout}
+          className="bg-[#ffffff] p-3 text-[#0078ff] rounded-[8px] text-lg font-bold"
+        >
+          Sign Out
+        </button>
       </nav>
 
       {/* Mobile Navigation Button */}
@@ -103,6 +115,15 @@ const Navbar = () => {
                   {link.text}
                 </Link>
               ))}
+              <div>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-3 text-base font-medium text-muted-foreground"
+                >
+                  <LogOut className="h-5 w-5" />
+                  Sign Out
+                </button>
+              </div>
             </nav>
           </div>
         </SheetContent>
